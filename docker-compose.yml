@@ -1,0 +1,23 @@
+# documentation: https://www.evolu.dev/docs/evolu-server
+# slogan: Local-first sync relay for Evolu apps with configurable quota
+# tags: local-first,sync,relay,websocket,encrypted,evolu
+# port: 4000
+
+services:
+  evolu-relay:
+    build: .
+    environment:
+      - SERVICE_FQDN_EVOLURELAY_4000
+      - PORT=${PORT:-4000}
+      - QUOTA_MB=${QUOTA_MB:-10}
+      - ENABLE_LOGGING=${ENABLE_LOGGING:-false}
+    volumes:
+      - evolu-data:/app/data
+    healthcheck:
+      test: ["CMD", "node", "-e", "const net=require('net');const s=net.connect(process.env.PORT||4000,'127.0.0.1',()=>{s.end();process.exit(0)});s.on('error',()=>process.exit(1))"]
+      interval: 30s
+      timeout: 5s
+      retries: 3
+
+volumes:
+  evolu-data:

@@ -1,0 +1,16 @@
+{
+  "name": "evolu-relay-custom",
+  "version": "1.0.0",
+  "description": "Custom Evolu Relay with configurable quota via environment variables",
+  "type": "module",
+  "scripts": {
+    "start": "node src/index.js"
+  },
+  "dependencies": {
+    "@evolu/common": "^9.5.0",
+    "@evolu/nodejs": "^5.4.0"
+  },
+  "engines": {
+    "node": ">=22.0.0"
+  }
+}
